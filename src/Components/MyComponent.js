@@ -1,18 +1,12 @@
 import React from "react";
-
-
-
+import UserInfo from "./UserInfo";
 
 class MyComponent extends React.Component {
 
-    state = {
-        name: "Hieu",
-        address: "Ninh Binh"
-    };
-
     render() {
         return (
-            <div> Hello my name is {this.state.name} and im from {this.state.address}
+            <div>
+                <UserInfo></UserInfo>
             </div>
         )
     }
