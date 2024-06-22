@@ -1,60 +1,75 @@
 import React from "react";
+import "./DisplayInfo.scss"
+import logo from "./../logo.svg"
 
-class DisplayInfo extends React.Component {
-
-    state = {
-        isShowList: true
-    }
-
-    handleHideShow = () => {
-        this.setState({
-            isShowList: !this.state.isShowList
-        })
-    }
+// class DisplayInfo extends React.Component {
 
 
-    render() {
-        const { listUser } = this.props
-        return (
-            <div>
-                <div>
-                    <span onClick={() => { this.handleHideShow() }}>
-                        {this.state.isShowList === true ? "Hide List User: " : "Show List User"}
-                    </span>
-                </div>
-                {this.state.isShowList &&
-                    <div>
-                        {listUser.map((user, index) => {
-                            return (
-                                <div key={user.id} className={+user.age > 23 ? "green" : "red"}>
-                                    <div >
-                                        My name is {user.name}
-                                        <br></br>
-                                        My age is {user.age}
-                                        <hr></hr>
-                                    </div>
+
+
+//     // render() {
+//     //     const { listUser } = this.props
+//     //     return (
+//     //         <div className="display-infor-container">
+
+//     //             {true &&
+//     //                 <>
+//     //                     {listUser.map((user, index) => {
+//     //                         return (
+//     //                             <div key={user.id} className={+user.age > 23 ? "green" : "red"}>
+//     //                                 <div >
+//     //                                     My name is {user.name}
+//     //                                     <br></br>
+//     //                                     My age is {user.age}
+//     //                                     <hr></hr>
+//     //                                 </div>
+//     //                                 <div>
+//     //                                     <button onClick={() => { this.props.handleDeleteUser(user.id) }}>Delete</button>
+//     //                                 </div>
+//     //                             </div>
+//     //                         )
+
+//     //                     })}
+
+//     //                 </>
+//     //             }
+//     //         </div>
+//     //     )
+//     // }
+
+// }
+
+const DisplayInfo = (props) => {
+
+    const { listUser } = props
+
+    return (
+        <div className="display-infor-container">
+
+            {true &&
+                <>
+                    {listUser.map((user, index) => {
+                        return (
+                            <div key={user.id} className={+user.age > 23 ? "green" : "red"}>
+                                <div >
+                                    My name is {user.name}
+                                    <br></br>
+                                    My age is {user.age}
+                                    <hr></hr>
                                 </div>
-                            )
+                                <div>
+                                    <button onClick={() => { props.handleDeleteUser(user.id) }}>Delete</button>
+                                </div>
+                            </div>
+                        )
 
-                        })}
+                    })}
 
-                    </div>
-                }
-            </div>
-
-            // <div>
-            //     <div>My name is {name} </div>
-            //     <div>My age is {age} </div>
-            //     <hr></hr>
-            //     <div>My name is {name} </div>
-            //     <div>My age is {age} </div>
-            //     <hr></hr>
-            //     <div>My name is {name} </div>
-            //     <div>My age is {age} </div>
-            //     <hr></hr>
-            // </div>
-        )
-    }
+                </>
+            }
+        </div>
+    )
 }
+
 
 export default DisplayInfo
