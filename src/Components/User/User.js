@@ -1,7 +1,7 @@
 const User = () => {
     return (
         <div>
-            this is admin page
+            this is User page
         </div>
     )
 }
