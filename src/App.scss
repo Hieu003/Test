@@ -8,14 +8,100 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 1400px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1400px !important;
+  }
+}
+
 .app-container {
   .head-container {
-    .navbar-nav {
+    .navbar {
+      button.btn-login.btn.btn-primary {
+        background-color: white;
+        color: black;
+        margin-right: 10px;
+        border-radius: 10px;
+        border: 1px solid #423f3f;
+        padding: 0 15px;
+        height: 40px;
+      }
+
+      button.btn-signup.btn.btn-primary {
+        border: 1px solid;
+        padding: 0 12px;
+        border-radius: 10px;
+        background-color: #474646;
+        height: 40px;
+
+
+        &:hover {
+          background-color: black;
+        }
+      }
+
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0) !important;
+      padding-top: 12px;
+
       .nav-link {
         &.active {
-          color: red;
+          color: rgb(16, 17, 17);
         }
       }
     }
   }
+
+  .homepage-container {
+    .homepage-content {
+      gap: 50px;
+      width: 50%;
+      padding: 100px;
+      flex-direction: column;
+      display: flex;
+      z-index: 2;
+    }
+
+    .title-1 {
+      z-index: 2;
+      font-size: 45px;
+      font-weight: bold;
+    }
+
+    .title-2 {
+      z-index: 2;
+      font-size: 25px;
+    }
+
+    .title-3 {
+      button {
+        position: relative;
+        z-index: 2;
+        border: 1px solid;
+        padding: 0 12px;
+        border-radius: 10px;
+        background-color: #474646;
+        height: 40px;
+      }
+
+      &:hover {
+        background-color: black;
+      }
+    }
+  }
+}
+
+video {
+  z-index: 1;
+  position: fixed;
+  top: -145px;
+  bottom: 0;
+  width: 100vw;
+  padding-top: 10px;
 }

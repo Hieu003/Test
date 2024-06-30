@@ -1,7 +1,26 @@
+import { Button } from "react-bootstrap"
+import videoHomePage from "../../asset/Video/Video-HomePage.mp4"
+
 const HomePage = (props) => {
     return (
-        <div>
-            This is Home Page
+        <div className="homepage-container">
+            <video autoPlay muted loop>
+                <source
+                    src={videoHomePage}
+                    type="video/mp4"
+                />
+            </video>
+
+            <div className="homepage-content">
+                <div className="title-1">Make forms
+                    worth filling out</div>
+                <div className="title-2">Get more data—like signups, feedback, and anything else—with forms designed to be refreshingly different.</div>
+                <div className="title-3">
+                    <Button>Getting Started</Button>
+                </div>
+
+            </div>
+
         </div>
     )
 }
