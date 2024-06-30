@@ -8,6 +8,19 @@
     }
 }
 
+.admin-content {
+    width: 100%;
+
+    .admin-header {
+        border: 1px solid red;
+        height: 40px;
+    }
+
+    .admin-main {
+        border: 1px solid green;
+    }
+}
+
 
 span.sidebar-header-title {
     margin-left: 10px;

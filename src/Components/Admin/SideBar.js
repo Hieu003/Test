@@ -9,6 +9,7 @@ import sidebarBg from '../../asset/Image/bg2.jpg';
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { MdDashboard } from "react-icons/md";
 import "../Admin/Admin.scss"
+import { Link } from 'react-router-dom';
 
 const SideBar = (props) => {
 
@@ -46,11 +47,14 @@ const SideBar = (props) => {
                             icon={<MdDashboard />}
                         >
                             DashBoard
+                            <Link to={"/admins"} />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu icon={<FaGem />} title={"Feature"}>
-                            <MenuItem>Quản lý người dùng</MenuItem>
+                            <MenuItem>Quản lý người dùng
+                                <Link to={"manage-users"} />
+                            </MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                             <MenuItem>Quản lý bài Quiz</MenuItem>
                         </SubMenu>
