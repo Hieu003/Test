@@ -1,6 +1,26 @@
 .manage-user-container {
+    border: 1px solid red;
+
+    .title {
+        font-weight: 600;
+        font-size: large;
+        padding: 5px 10px;
+    }
+
     .user-content {
-        border: 1px solid red;
+        padding: 15px 10px;
+
+        .btn {
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .user-table {
+            margin-top: 10px;
+        }
     }
 }
 

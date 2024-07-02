@@ -47,7 +47,7 @@ const SideBar = (props) => {
                             icon={<MdDashboard />}
                         >
                             DashBoard
-                            <Link to={"/admins"} />
+                            <Link to={"dash-board"} />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">

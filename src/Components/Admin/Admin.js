@@ -16,10 +16,10 @@ const Admin = () => {
 
             <div className="admin-content">
                 <div className="admin-header">
-                    Header goes here
+
                 </div>
                 <div className="admin-main">
-                    Main goes here
+
                 </div>
 
                 <FaBars onClick={() => setCollapsed(!collapsed)}></FaBars>

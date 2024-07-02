@@ -3,12 +3,25 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../Content/ManageUser.scss'
 import { FcPlus } from "react-icons/fc";
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
-const AddNewUserModal = () => {
+import 'react-toastify/dist/ReactToastify.css';
 
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+const AddNewUserModal = (props) => {
+
+    const { show, setShow } = props
+    // const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setEmail('')
+        setPassword('')
+        setUsername('')
+        setRole("")
+        setPreviewImage('')
+
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const [email, setEmail] = useState('');
@@ -27,12 +40,74 @@ const AddNewUserModal = () => {
         }
     }
 
+    // const handleSubmitCreateUser = () => {
+    //     // console.log(alert('me'))
+    //     const newUserFormData = new FormData();
+    //     newUserFormData.append('email', email)
+    //     newUserFormData.append('password', password)
+    //     newUserFormData.append('username', username)
+    //     newUserFormData.append('role', role)
+    //     newUserFormData.append('userImage', image)
+
+    //     axios({
+    //         method: 'post',
+    //         url: 'http://localhost:8081/api/v1/participant',
+    //         data: newUserFormData
+    //     }).then((res) => {
+    //         console.log(res)
+    //     })
+    // }
+
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+
+
+
+
+
+
+    const handleSubmitCreateUser = async () => {
+        //validate 
+        const isValidEmail = validateEmail(email)
+        if (!isValidEmail) {
+            toast.error('Invalid Email')
+            return
+        }
+        if (!password) {
+            toast.error('Invalid Password')
+            return
+        }
+
+        //Post new user
+        const newUserFormData = new FormData();
+        newUserFormData.append('email', email)
+        newUserFormData.append('password', password)
+        newUserFormData.append('username', username)
+        newUserFormData.append('role', role)
+        newUserFormData.append('userImage', image)
+        let res = await axios.post('http://localhost:8081/api/v1/participant', newUserFormData);
+        console.log("check res", res.data)
+
+        if (res.data && res.data.EC === 0) {
+            toast.success('Tạo mới người dùng thành công ')
+            handleClose();
+        }
+        if (res.data && res.data.EC !== 0) {
+            toast.error(res.data.EM)
+        }
+
+    }
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Add new user
-            </Button>
+            </Button> */}
 
             <Modal show={show} onHide={handleClose} backdrop="static" className='modal-add'>
                 <Modal.Header closeButton>
@@ -73,11 +148,22 @@ const AddNewUserModal = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
                         Save
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     );
 }
