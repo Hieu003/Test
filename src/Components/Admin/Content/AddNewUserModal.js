@@ -92,6 +92,7 @@ const AddNewUserModal = (props) => {
         if (res.data && res.data.EC === 0) {
             toast.success('Tạo mới người dùng thành công ')
             handleClose();
+            await props.fetchListUser()
         }
         if (res.data && res.data.EC !== 0) {
             toast.error(res.data.EM)

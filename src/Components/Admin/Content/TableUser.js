@@ -1,23 +1,11 @@
 import { useEffect, useState } from "react"
 import { getListUser } from "../../Service/apiService";
 
-const TableUser = () => {
-    const [listUser, setListUser] = useState([
-
-    ])
+const TableUser = (props) => {
+    const { listUser } = props
 
 
-    useEffect(() => {
-        fetchListUser()
-    }, []);
 
-    const fetchListUser = async () => {
-        let res = await getListUser()
-        if (res.data.EC === 0) {
-            setListUser(res.data.DT)
-        }
-        console.log(res)
-    }
 
 
     return (
@@ -29,16 +17,22 @@ const TableUser = () => {
                         <th scope="col">Email</th>
                         <th scope="col">UserName</th>
                         <th scope="col">Role</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {listUser && listUser.length > 0 && listUser.map((item, index) => {
                         return (
                             < tr key={`table-user-${index}`}>
-                                <th scope="row">{index + 1}</th>
+                                <td>{item.id}</td>
                                 <td>{item.username}</td>
                                 <td>{item.email}</td>
                                 <td>{item.role}</td>
+                                <td>
+                                    <button className="btn btn-secondary">View</button>
+                                    <button className="btn btn-success">Update</button>
+                                    <button className="btn btn-warning">Delete</button>
+                                </td>
                             </tr>
                         )
                     }
@@ -47,7 +41,7 @@ const TableUser = () => {
                     {listUser && listUser.length === 0 &&
 
                         <tr>
-                            <td colSpan={4}>Not Found User</td>
+                            <td colSpan={5}>Not Found User</td>
                         </tr>}
 
 
