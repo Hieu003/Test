@@ -25,12 +25,12 @@ const TableUser = (props) => {
                         return (
                             < tr key={`table-user-${index}`}>
                                 <td>{item.id}</td>
-                                <td>{item.username}</td>
                                 <td>{item.email}</td>
+                                <td>{item.username}</td>
                                 <td>{item.role}</td>
                                 <td>
                                     <button className="btn btn-secondary">View</button>
-                                    <button className="btn btn-success">Update</button>
+                                    <button className="btn btn-success" onClick={() => props.handleShowUpdateModal(item)}>Update</button>
                                     <button className="btn btn-warning">Delete</button>
                                 </td>
                             </tr>

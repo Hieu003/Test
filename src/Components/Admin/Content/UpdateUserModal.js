@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../Content/ManageUser.scss'
@@ -9,10 +9,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postCreateNewUser } from '../../Service/apiService';
 
+import _ from 'lodash';
 
-const AddNewUserModal = (props) => {
 
-    const { show, setShow } = props
+const UpdateUserModal = (props) => {
+
+    const { showUpdateModal, setShowUpdateModal, dataUpdate } = props
     // const [show, setShow] = useState(false);
     const handleClose = () => {
         setEmail('')
@@ -21,7 +23,7 @@ const AddNewUserModal = (props) => {
         setRole("")
         setPreviewImage('')
 
-        setShow(false);
+        setShowUpdateModal(false);
     }
     const handleShow = () => {
         setEmail('')
@@ -29,7 +31,7 @@ const AddNewUserModal = (props) => {
         setUsername('')
         setRole("")
         setPreviewImage('')
-        setShow(true);
+        setShowUpdateModal(true);
     }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +39,17 @@ const AddNewUserModal = (props) => {
     const [role, setRole] = useState('User');
     const [image, setImage] = useState('');
     const [previewimage, setPreviewImage] = useState('');
+
+
+    useEffect(() => {
+        if (!_.isEmpty(dataUpdate)) {
+            setEmail(dataUpdate.email)
+            setUsername(dataUpdate.username)
+            setRole(dataUpdate.role)
+            setPreviewImage(`data:image/jpeg;base64, ${dataUpdate.image}`)
+        }
+
+    }, [dataUpdate])
 
     const handleOnChangeImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -112,9 +125,9 @@ const AddNewUserModal = (props) => {
                 Add new user
             </Button> */}
 
-            <Modal show={show} onHide={handleClose} backdrop="static" className='modal-add'>
+            <Modal show={showUpdateModal} onHide={handleClose} backdrop="static" className='modal-add'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New User</Modal.Title>
+                    <Modal.Title>Update A User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body><form className="row g-3">
                     <div className="col-md-6">
@@ -172,4 +185,4 @@ const AddNewUserModal = (props) => {
 }
 
 
-export default AddNewUserModal
+export default UpdateUserModal
