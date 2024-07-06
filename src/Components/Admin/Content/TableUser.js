@@ -4,10 +4,6 @@ import { getListUser } from "../../Service/apiService";
 const TableUser = (props) => {
     const { listUser } = props
 
-
-
-
-
     return (
         <>
             <table className="table  table-bordered table-hover">

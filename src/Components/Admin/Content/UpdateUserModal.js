@@ -7,14 +7,14 @@ import { FcPlus } from "react-icons/fc";
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { postCreateNewUser } from '../../Service/apiService';
+import { putListUser } from '../../Service/apiService';
 
 import _ from 'lodash';
 
 
 const UpdateUserModal = (props) => {
 
-    const { showUpdateModal, setShowUpdateModal, dataUpdate } = props
+    const { showUpdateModal, setShowUpdateModal, dataUpdate, resetListUser } = props
     // const [show, setShow] = useState(false);
     const handleClose = () => {
         setEmail('')
@@ -22,8 +22,8 @@ const UpdateUserModal = (props) => {
         setUsername('')
         setRole("")
         setPreviewImage('')
-
         setShowUpdateModal(false);
+        resetListUser()
     }
     const handleShow = () => {
         setEmail('')
@@ -43,6 +43,7 @@ const UpdateUserModal = (props) => {
 
     useEffect(() => {
         if (!_.isEmpty(dataUpdate)) {
+
             setEmail(dataUpdate.email)
             setUsername(dataUpdate.username)
             setRole(dataUpdate.role)
@@ -59,25 +60,6 @@ const UpdateUserModal = (props) => {
             setPreviewImage('')
         }
     }
-
-    // const handleSubmitCreateUser = () => {
-    //     // console.log(alert('me'))
-    //     const newUserFormData = new FormData();
-    //     newUserFormData.append('email', email)
-    //     newUserFormData.append('password', password)
-    //     newUserFormData.append('username', username)
-    //     newUserFormData.append('role', role)
-    //     newUserFormData.append('userImage', image)
-
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:8081/api/v1/participant',
-    //         data: newUserFormData
-    //     }).then((res) => {
-    //         console.log(res)
-    //     })
-    // }
-
     const validateEmail = (email) => {
         return String(email)
             .toLowerCase()
@@ -86,30 +68,14 @@ const UpdateUserModal = (props) => {
             );
     };
 
+    const handleSubmitUpdateUser = async () => {
+        //Post  user
 
+        let res = await putListUser(dataUpdate.id, username, role, image)
 
-
-
-
-    const handleSubmitCreateUser = async () => {
-        //validate 
-        const isValidEmail = validateEmail(email)
-        if (!isValidEmail) {
-            toast.error('Invalid Email')
-            return
-        }
-        if (!password) {
-            toast.error('Invalid Password')
-            return
-        }
-
-        //Post new user
-
-        let res = await postCreateNewUser(email, password, username, role, image)
-        console.log("check res", res.data)
 
         if (res.data && res.data.EC === 0) {
-            toast.success('Tạo mới người dùng thành công ')
+            toast.success('Cập nhật thành công ')
             handleClose();
             await props.fetchListUser()
         }
@@ -118,6 +84,8 @@ const UpdateUserModal = (props) => {
         }
 
     }
+
+
 
     return (
         <>
@@ -132,11 +100,11 @@ const UpdateUserModal = (props) => {
                 <Modal.Body><form className="row g-3">
                     <div className="col-md-6">
                         <label for="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4" value={email} onChange={(event) => { setEmail(event.target.value) }} />
+                        <input type="email" className="form-control" id="inputEmail4" value={email} disabled={true} onChange={(event) => { setEmail(event.target.value) }} />
                     </div>
                     <div className="col-md-6">
                         <label for="inputPassword4" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="inputPassword4" value={password} onChange={(event) => { setPassword(event.target.value) }} />
+                        <input type="password" className="form-control" id="inputPassword4" value={password} disabled={true} onChange={(event) => { setPassword(event.target.value) }} />
                     </div>
                     <div className="col-md-6">
                         <label for="inputCity" className="form-label">Username</label>
@@ -164,7 +132,7 @@ const UpdateUserModal = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
+                    <Button variant="primary" onClick={() => handleSubmitUpdateUser()}>
                         Save
                     </Button>
                 </Modal.Footer>

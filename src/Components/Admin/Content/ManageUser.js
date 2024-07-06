@@ -41,6 +41,10 @@ const ManageUser = () => {
         }
         console.log(res)
     }
+
+    const resetListUser = () => {
+        setDataUpdate({})
+    }
     return (
         <div className="manage-user-container">
 
@@ -53,7 +57,7 @@ const ManageUser = () => {
                 <div className='user-table '><TableUser listUser={listUser} handleShowUpdateModal={handleShowUpdateModal} /> </div>
 
                 <AddNewUserModal show={show} setShow={setShowModal} fetchListUser={fetchListUser} />
-                <UpdateUserModal showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} />
+                <UpdateUserModal resetListUser={resetListUser} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} fetchListUser={fetchListUser} />
             </div>
 
 
