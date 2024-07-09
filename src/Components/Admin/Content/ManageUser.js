@@ -8,6 +8,7 @@ import TableUser from './TableUser';
 import { useEffect, useState } from "react"
 import { getListUser } from "../../Service/apiService";
 import UpdateUserModal from './UpdateUserModal';
+import ViewUserModal from './ViewUserModal';
 
 
 const ManageUser = () => {
@@ -58,6 +59,7 @@ const ManageUser = () => {
 
                 <AddNewUserModal show={show} setShow={setShowModal} fetchListUser={fetchListUser} />
                 <UpdateUserModal resetListUser={resetListUser} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} fetchListUser={fetchListUser} />
+                <ViewUserModal />
             </div>
 
 
