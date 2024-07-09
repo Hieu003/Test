@@ -17,6 +17,9 @@ const ManageUser = () => {
 
     const [showUpdateModal, setShowUpdateModal] = useState(false)
 
+    const [showViewModal, setShowViewModal] = useState(false)
+
+
     const [dataUpdate, setDataUpdate] = useState({})
 
     const [listUser, setListUser] = useState([
@@ -24,7 +27,11 @@ const ManageUser = () => {
     ])
 
 
-
+    const handleShowViewModal = (user) => {
+        setDataUpdate(user)
+        setShowViewModal(true)
+        console.log("view clicked")
+    }
 
     const handleShowUpdateModal = (user) => {
         setShowUpdateModal(true);
@@ -55,11 +62,14 @@ const ManageUser = () => {
 
             <div className="user-content">
                 <button className='btn btn-primary' onClick={() => setShowModal(true)}><FcPlus /> Add new user</button>
-                <div className='user-table '><TableUser listUser={listUser} handleShowUpdateModal={handleShowUpdateModal} /> </div>
+                <div className='user-table '><TableUser
+                    handleShowViewModal={handleShowViewModal}
+                    listUser={listUser}
+                    handleShowUpdateModal={handleShowUpdateModal} /> </div>
 
                 <AddNewUserModal show={show} setShow={setShowModal} fetchListUser={fetchListUser} />
                 <UpdateUserModal resetListUser={resetListUser} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} fetchListUser={fetchListUser} />
-                <ViewUserModal />
+                <ViewUserModal showViewModal={showViewModal} setShowViewModal={setShowViewModal} resetListUser={resetListUser} fetchListUser={fetchListUser} dataUpdate={dataUpdate} />
             </div>
 
 
