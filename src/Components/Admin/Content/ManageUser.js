@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { getListUser } from "../../Service/apiService";
 import UpdateUserModal from './UpdateUserModal';
 import ViewUserModal from './ViewUserModal';
+import DeleteUserModal from './DeleteUserModal';
 
 
 const ManageUser = () => {
@@ -69,6 +70,7 @@ const ManageUser = () => {
 
                 <AddNewUserModal show={show} setShow={setShowModal} fetchListUser={fetchListUser} />
                 <UpdateUserModal resetListUser={resetListUser} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} fetchListUser={fetchListUser} />
+                <DeleteUserModal />
                 <ViewUserModal showViewModal={showViewModal} setShowViewModal={setShowViewModal} resetListUser={resetListUser} fetchListUser={fetchListUser} dataUpdate={dataUpdate} />
             </div>
 
