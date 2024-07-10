@@ -27,7 +27,7 @@ const TableUser = (props) => {
                                 <td>
                                     <button className="btn btn-secondary" onClick={() => props.handleShowViewModal(item)}>View</button>
                                     <button className="btn btn-success" onClick={() => props.handleShowUpdateModal(item)}>Update</button>
-                                    <button className="btn btn-warning">Delete</button>
+                                    <button className="btn btn-warning" onClick={() => props.handleShowDeleteModal(item)}>Delete</button>
                                 </td>
                             </tr>
                         )

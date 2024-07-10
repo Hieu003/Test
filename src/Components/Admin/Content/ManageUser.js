@@ -20,9 +20,10 @@ const ManageUser = () => {
 
     const [showViewModal, setShowViewModal] = useState(false)
 
-
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [dataUpdate, setDataUpdate] = useState({})
 
+    const [dataDelete, setDataDelete] = useState({})
     const [listUser, setListUser] = useState([
 
     ])
@@ -31,12 +32,21 @@ const ManageUser = () => {
     const handleShowViewModal = (user) => {
         setDataUpdate(user)
         setShowViewModal(true)
-        console.log("view clicked")
     }
 
     const handleShowUpdateModal = (user) => {
         setShowUpdateModal(true);
         setDataUpdate(user)
+    }
+
+    const handleShowDeleteModal = (user) => {
+        setShowDeleteModal(true)
+        setDataDelete(user)
+        console.log("data delete", dataDelete);
+    }
+
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false)
     }
 
     useEffect(() => {
@@ -66,12 +76,13 @@ const ManageUser = () => {
                 <div className='user-table '><TableUser
                     handleShowViewModal={handleShowViewModal}
                     listUser={listUser}
+                    handleShowDeleteModal={handleShowDeleteModal}
                     handleShowUpdateModal={handleShowUpdateModal} /> </div>
 
                 <AddNewUserModal show={show} setShow={setShowModal} fetchListUser={fetchListUser} />
                 <UpdateUserModal resetListUser={resetListUser} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} dataUpdate={dataUpdate} fetchListUser={fetchListUser} />
-                <DeleteUserModal />
-                <ViewUserModal showViewModal={showViewModal} setShowViewModal={setShowViewModal} resetListUser={resetListUser} fetchListUser={fetchListUser} dataUpdate={dataUpdate} />
+                <DeleteUserModal fetchListUser={fetchListUser} dataDelete={dataDelete} show={showDeleteModal} setShow={setShowDeleteModal} handleClose={handleCloseDeleteModal} />
+                <ViewUserModal showViewModal={showViewModal} setShow={setShowViewModal} resetListUser={resetListUser} fetchListUser={fetchListUser} dataUpdate={dataUpdate} />
             </div>
 
 

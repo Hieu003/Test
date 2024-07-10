@@ -12,7 +12,7 @@ import _ from 'lodash';
 
 const ViewUserModal = (props) => {
 
-    const { showViewModal, setShowViewModal, dataUpdate, resetListUser } = props
+    const { showViewModal, setShow, dataUpdate, resetListUser } = props
     // const [show, setShow] = useState(false);
     const handleClose = () => {
         setEmail('')
@@ -20,7 +20,7 @@ const ViewUserModal = (props) => {
         setUsername('')
         setRole("")
         setPreviewImage('')
-        setShowViewModal(false);
+        setShow(false);
         resetListUser()
     }
     const handleShow = () => {
@@ -29,7 +29,7 @@ const ViewUserModal = (props) => {
         setUsername('')
         setRole("")
         setPreviewImage('')
-        setShowViewModal(true);
+        setShow(true);
     }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
