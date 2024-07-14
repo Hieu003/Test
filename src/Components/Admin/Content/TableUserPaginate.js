@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react"
+import { getListUser } from "../../Service/apiService";
+import ReactPaginate from "react-paginate";
+
+
+const TableUserPaginate = (props) => {
+    const { listUser, pageCount } = props
+
+    const handlePageClick = (event) => {
+        props.fetchListUserWithPaginate(+event.selected + 1)
+        console.log(`User requested page number ${event.selected}`);
+
+    };
+
+    return (
+        <>
+            <table className="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listUser && listUser.length > 0 && listUser.map((item, index) => {
+                        return (
+                            < tr key={`table-user-${index}`}>
+                                <td>{item.id}</td>
+                                <td>{item.email}</td>
+                                <td>{item.username}</td>
+                                <td>{item.role}</td>
+                                <td>
+                                    <button className="btn btn-secondary" onClick={() => props.handleShowViewModal(item)}>View</button>
+                                    <button className="btn btn-success" onClick={() => props.handleShowUpdateModal(item)}>Update</button>
+                                    <button className="btn btn-warning" onClick={() => props.handleShowDeleteModal(item)}>Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    }
+                    )}
+
+                    {listUser && listUser.length === 0 &&
+
+                        <tr>
+                            <td colSpan={5}>Not Found User</td>
+                        </tr>}
+                </tbody>
+            </table >
+            <div className="user-pagination">
+                <ReactPaginate
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="< Prev"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                />
+            </div>
+
+        </>
+
+
+    )
+}
+
+export default TableUserPaginate 

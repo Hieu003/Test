@@ -6,14 +6,17 @@ import '../Content/ManageUser.scss'
 import { FcPlus } from "react-icons/fc";
 import TableUser from './TableUser';
 import { useEffect, useState } from "react"
-import { getListUser } from "../../Service/apiService";
+import { getListUser, getUserWithPaginate } from "../../Service/apiService";
 import UpdateUserModal from './UpdateUserModal';
 import ViewUserModal from './ViewUserModal';
 import DeleteUserModal from './DeleteUserModal';
+import TableUserPaginate from './TableUserPaginate';
 
 
 const ManageUser = () => {
 
+    const LIMIT_USER = 5
+    const [pageCount, setPageCount] = useState(0)
     const [show, setShowModal] = useState(false)
 
     const [showUpdateModal, setShowUpdateModal] = useState(false)
@@ -50,7 +53,7 @@ const ManageUser = () => {
     }
 
     useEffect(() => {
-        fetchListUser()
+        fetchListUserWithPaginate(1)
     }, []);
 
     const fetchListUser = async () => {
@@ -58,7 +61,14 @@ const ManageUser = () => {
         if (res.data.EC === 0) {
             setListUser(res.data.DT)
         }
-        console.log(res)
+    }
+
+    const fetchListUserWithPaginate = async (page) => {
+        let res = await getUserWithPaginate(page, LIMIT_USER)
+        if (res.data.EC === 0) {
+            setListUser(res.data.DT.users)
+            setPageCount(res.data.DT.totalPages)
+        }
     }
 
     const resetListUser = () => {
@@ -73,7 +83,9 @@ const ManageUser = () => {
 
             <div className="user-content">
                 <button className='btn btn-primary' onClick={() => setShowModal(true)}><FcPlus /> Add new user</button>
-                <div className='user-table '><TableUser
+                <div><TableUserPaginate
+                    fetchListUserWithPaginate={fetchListUserWithPaginate}
+                    pageCount={pageCount}
                     handleShowViewModal={handleShowViewModal}
                     listUser={listUser}
                     handleShowDeleteModal={handleShowDeleteModal}
