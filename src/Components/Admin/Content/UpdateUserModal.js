@@ -77,7 +77,8 @@ const UpdateUserModal = (props) => {
         if (res.data && res.data.EC === 0) {
             toast.success('Cập nhật thành công ')
             handleClose();
-            await props.fetchListUser()
+            await props.fetchListUserWithPaginate(props.currentPage)
+            // await props.fetchListUser()
         }
         if (res.data && res.data.EC !== 0) {
             toast.error(res.data.EM)

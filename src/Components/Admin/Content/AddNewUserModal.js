@@ -93,12 +93,12 @@ const AddNewUserModal = (props) => {
         //Post new user
 
         let res = await postCreateNewUser(email, password, username, role, image)
-        console.log("check res", res.data)
-
         if (res.data && res.data.EC === 0) {
             toast.success('Tạo mới người dùng thành công ')
             handleClose();
-            await props.fetchListUser()
+            props.setCurrentPage(1)
+            await props.fetchListUserWithPaginate(1)
+            // await props.fetchListUser()
         }
         if (res.data && res.data.EC !== 0) {
             toast.error(res.data.EM)
