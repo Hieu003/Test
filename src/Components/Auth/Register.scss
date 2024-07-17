@@ -1,0 +1,67 @@
+.Register-container {
+    .Register-header {
+        .btn-signup {
+            padding: 3px 15px;
+            border: none;
+            margin-left: 5px;
+            border-radius: 3px;
+
+            &:hover {
+                background-color: white;
+            }
+        }
+
+        height: 45px;
+        text-align: right;
+        padding: 5px 100px 0 100px
+    }
+
+    .Register-title {
+        font-size: large;
+        font-weight: 600;
+        text-align: center;
+        padding: 20px 0
+    }
+
+    .Register-welcome {
+        font-size: medium;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .Register-form {
+        display: flex;
+        flex-direction: column;
+
+        .icon-eye {
+            position: absolute;
+            right: 525px;
+            bottom: 405px;
+        }
+
+        .icon-eyeclosed {
+            position: absolute;
+            right: 525px;
+            bottom: 405px;
+        }
+    }
+
+    input {
+        margin-bottom: 15px;
+        margin-top: 3px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        margin: 20px 0;
+        color: white;
+        background: black;
+    }
+
+    .back {
+        cursor: pointer;
+    }
+}

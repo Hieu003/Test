@@ -10,6 +10,8 @@ import HomePage from './Components/Home/HomePage';
 import ManageUser from "./Components/Admin/Content/ManageUser"
 import DashBoard from "./Components/Admin/Content/DashBoard"
 import Login from './Components/Auth/Login';
+import Register from './Components/Auth/Register';
+
 
 
 
@@ -26,9 +28,9 @@ const Layout = (props) => {
                     <Route index element={<DashBoard />} />
                     <Route path='manage-users' element={<ManageUser />} />
                 </Route>
-
                 <Route path='/login' element={<Login />} >
-
+                </Route>
+                <Route path='/register' element={<Register />} >
                 </Route>
             </Routes>
             <ToastContainer
