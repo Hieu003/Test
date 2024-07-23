@@ -3,12 +3,13 @@ import ".//Login.scss"
 import { Navigate, useNavigate } from "react-router-dom"
 import { postLogin } from "../Service/apiService"
 import { toast } from "react-toastify"
-
+import { useDispatch } from "react-redux"
+import { doLogin } from "../../redux/action/loginAction"
 const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleNavigateSignUp = () => {
         navigate('/register')
@@ -37,6 +38,7 @@ const Login = (props) => {
         // call Api 
         let res = await postLogin(email, password)
         if (res.data && res.data.EC === 0) {
+            dispatch(doLogin(res))
             toast.success(res.data.EM)
             navigate("/")
         }
