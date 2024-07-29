@@ -6,10 +6,15 @@ import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 import { doLogin } from "../../redux/action/loginAction"
 import { ImSpinner2 } from "react-icons/im";
+import React, { useRef } from 'react'
+import LoadingBar from 'react-top-loading-bar'
 const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+
+    const ref = useRef(null)
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -27,12 +32,15 @@ const Login = (props) => {
     };
     const handleSubmitLogin = async () => {
         //Validate
+        ref.current.continuousStart()
         const isValidEmail = validateEmail(email)
         if (!isValidEmail) {
+            ref.current.complete()
             toast.error('Invalid Email')
             return
         }
         if (!password) {
+            ref.current.complete()
             toast.error('Invalid Password')
             return
         }
@@ -42,11 +50,13 @@ const Login = (props) => {
         let res = await postLogin(email, password)
         if (res.data && res.data.EC === 0) {
             dispatch(doLogin(res))
+            ref.current.complete()
             toast.success(res.data.EM)
             setIsLoading(false)
-            // navigate("/")
+            navigate("/")
         }
         if (res.data && res.data.EC !== 0) {
+            ref.current.complete()
             toast.error(res.data.EM)
             setIsLoading(false)
         }
@@ -97,8 +107,13 @@ const Login = (props) => {
                 </div>
 
             </div>
+            <div>
+                <LoadingBar color='#42b0ff' ref={ref} height={4} shadow={true} />
+            </div>
 
         </div>
+
+
     )
 }
 
