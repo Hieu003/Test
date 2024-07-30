@@ -1,43 +1,32 @@
 import axios from "axios";
-import nProgress from "nprogress";
-
+import { store } from "../redux/store";
 
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8081/',
-    timeout: 10000,
+
 });
 
 
-
-nProgress.configure({
-    showSpinner: true,
-    trickleSpeed: 100
-})
-
 // Add a request interceptor
-axios.interceptors.request.use(function (config) {
-    nProgress.start()
+axiosInstance.interceptors.request.use(function (config) {
+    const access_token = store.getState().login.account.access_token;
+
+    config.headers["Authorization"] = "Bearer " + access_token;
     // Do something before request is sent
     return config;
 }, function (error) {
-    nProgress.start()
 
     // Do something with request error
     return Promise.reject(error);
 });
 
 // Add a response interceptor
-axios.interceptors.response.use(function (response) {
-    nProgress.done()
-
+axiosInstance.interceptors.response.use(function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response && response.data ? response.data : response;
 }, function (error) {
-    nProgress.done()
-
-
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return error && error.response && error.response.data ? error.response.data : Promise.reject(error);

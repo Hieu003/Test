@@ -14,7 +14,7 @@ const DeleteUserModal = (props) => {
         let res = await deleteUser(dataDelete.id)
 
 
-        if (res.data && res.data.EC === 0) {
+        if (res && res.EC === 0) {
             toast.success('Xóa người dùng thành công')
             handleClose();
 
@@ -22,8 +22,8 @@ const DeleteUserModal = (props) => {
             await props.fetchListUserWithPaginate(1)
             // await props.fetchListUser()
         }
-        if (res.data && res.data.EC !== 0) {
-            toast.error(res.data.EM)
+        if (res.data && res.EC !== 0) {
+            toast.error(res.EM)
         }
     }
 

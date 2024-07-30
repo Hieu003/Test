@@ -1,7 +1,12 @@
 import { Button } from "react-bootstrap"
 import videoHomePage from "../../asset/Video/Video-HomePage.mp4"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const HomePage = (props) => {
+
+    const isAuthenticated = useSelector(state => state.login.isAuthenticated)
+    const navigate = useNavigate()
     return (
         <div className="homepage-container">
             <video autoPlay muted loop>
@@ -16,7 +21,11 @@ const HomePage = (props) => {
                     worth filling out</div>
                 <div className="title-2">Get more data—like signups, feedback, and anything else—with forms designed to be refreshingly different.</div>
                 <div className="title-3">
-                    <Button>Getting Started</Button>
+                    {isAuthenticated === false ?
+                        <Button onClick={() => navigate(`/login`)}>Getting Started</Button>
+                        :
+                        <Button onClick={() => navigate(`/users`)}>Doing Quiz Now</Button>
+                    }
                 </div>
 
             </div>

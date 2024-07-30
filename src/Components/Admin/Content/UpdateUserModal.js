@@ -74,14 +74,14 @@ const UpdateUserModal = (props) => {
         let res = await putListUser(dataUpdate.id, username, role, image)
 
 
-        if (res.data && res.data.EC === 0) {
+        if (res && res.EC === 0) {
             toast.success('Cập nhật thành công ')
             handleClose();
             await props.fetchListUserWithPaginate(props.currentPage)
             // await props.fetchListUser()
         }
-        if (res.data && res.data.EC !== 0) {
-            toast.error(res.data.EM)
+        if (res && res.EC !== 0) {
+            toast.error(res.EM)
         }
 
     }

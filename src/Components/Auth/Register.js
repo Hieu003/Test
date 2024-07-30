@@ -38,12 +38,12 @@ const Register = (props) => {
         }
 
         let res = await postRegister(email, password)
-        if (res.data && res.data.EC === 0) {
-            toast.success(res.data.EM)
+        if (res && res.EC === 0) {
+            toast.success(res.EM)
             navigate("/login")
         }
-        if (res.data && res.data.EC !== 0) {
-            toast.error(res.data.EM)
+        if (res && res.EC !== 0) {
+            toast.error(res.EM)
 
         }
     }

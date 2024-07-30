@@ -11,6 +11,7 @@ import ManageUser from "./Components/Admin/Content/ManageUser"
 import DashBoard from "./Components/Admin/Content/DashBoard"
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
+import ListQuiz from './Components/User/ListQuiz';
 
 
 
@@ -21,7 +22,7 @@ const Layout = (props) => {
             <Routes>
                 <Route path='/' element={<App />} >
                     <Route index element={<HomePage />} />
-                    <Route path='/users' element={<User />} />
+                    <Route path='/users' element={<ListQuiz />} />
 
                 </Route>
                 <Route path='/admins' element={<Admin />} >

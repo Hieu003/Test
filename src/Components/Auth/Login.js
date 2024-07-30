@@ -48,16 +48,16 @@ const Login = (props) => {
 
         // call Api 
         let res = await postLogin(email, password)
-        if (res.data && res.data.EC === 0) {
+        if (res && res.EC === 0) {
             dispatch(doLogin(res))
             ref.current.complete()
-            toast.success(res.data.EM)
+            toast.success(res.EM)
             setIsLoading(false)
             navigate("/")
         }
-        if (res.data && res.data.EC !== 0) {
+        if (res && res.EC !== 0) {
             ref.current.complete()
-            toast.error(res.data.EM)
+            toast.error(res.EM)
             setIsLoading(false)
         }
 

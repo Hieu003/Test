@@ -55,20 +55,22 @@ const ManageUser = () => {
 
     useEffect(() => {
         fetchListUserWithPaginate(1)
+
     }, []);
 
     const fetchListUser = async () => {
         let res = await getListUser()
-        if (res.data.EC === 0) {
+        if (res.EC === 0) {
             setListUser(res.data.DT)
         }
     }
 
     const fetchListUserWithPaginate = async (page) => {
         let res = await getUserWithPaginate(page, LIMIT_USER)
-        if (res.data.EC === 0) {
-            setListUser(res.data.DT.users)
-            setPageCount(res.data.DT.totalPages)
+        console.log(res);
+        if (res.EC === 0) {
+            setListUser(res.DT.users)
+            setPageCount(res.DT.totalPages)
         }
     }
 
