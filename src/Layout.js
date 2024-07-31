@@ -12,9 +12,16 @@ import DashBoard from "./Components/Admin/Content/DashBoard"
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import ListQuiz from './Components/User/ListQuiz';
+import DetailQuiz from './Components/User/DetailQuiz';
 
 
-
+const NotFound = () => {
+    return (
+        <div className='container mt-3 alert alert-danger'>
+            404. Not Found URL
+        </div>
+    )
+}
 
 const Layout = (props) => {
     return (
@@ -23,8 +30,9 @@ const Layout = (props) => {
                 <Route path='/' element={<App />} >
                     <Route index element={<HomePage />} />
                     <Route path='/users' element={<ListQuiz />} />
-
                 </Route>
+                <Route path='/quiz/:id' element={<DetailQuiz />} />
+
                 <Route path='/admins' element={<Admin />} >
                     <Route index element={<DashBoard />} />
                     <Route path='manage-users' element={<ManageUser />} />
@@ -33,6 +41,7 @@ const Layout = (props) => {
                 </Route>
                 <Route path='/register' element={<Register />} >
                 </Route>
+                <Route path='*' element={<NotFound />} />
             </Routes>
             <ToastContainer
                 position="top-center"
