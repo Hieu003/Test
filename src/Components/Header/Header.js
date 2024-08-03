@@ -41,7 +41,7 @@ const Header = () => {
 
                             :
                             <NavDropdown title="Setting" id="basic-nav-dropdown">
-                                <NavDropdown.Item >Log Out</NavDropdown.Item>
+                                <NavDropdown.Item  onClick={() => handleLogin()} >Log Out</NavDropdown.Item>
                                 <NavDropdown.Item>Log In </NavDropdown.Item>
                                 <NavDropdown.Item >Profile</NavDropdown.Item>
                             </NavDropdown>
